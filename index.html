@@ -45,14 +45,24 @@
                 const name = data.data[champion].id;
                 const title = data.data[champion].title;
                 const lore = data.data[champion].lore
-                
+                const skins = [];
+                (data.data[champion].skins).forEach(element => {
+                    skins.push(element.num);
+                });
+                                  
                 let output = `
                     <h3>${name}</h3>
                     <h5 class="font-weight-light mb-4">${title}</h5>
                     <img src='https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion}_0.jpg' class="img-thumbnail" style="max-width: 60%">
-                    <hr>
+                    <hr style="border-color: white">
                     <p">${lore}</p>
+                    <hr style="border-color: white">
+                    <h3 class="font-weight-light">Skins</h3>
                 `
+
+                skins.forEach(element =>{
+                    output += `<img src='https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion}_${element}.jpg' class="img-thumbnail m-4" style="max-width: 30%">`
+                });
 
                 document.getElementById('output').innerHTML = output;
             })
