@@ -10,15 +10,7 @@
 </head>
 <body class="bg-dark">
     <div class="container">
-        <h1 class="display-4 mt-4 mb-2 text-center text-info"><strong>League o Legens</strong></h1>
-        <hr style="border-color:white">
-        <div class="bg-dark text-light font-weight-light text-center" role="alert">
-            <p class="mb-0 mt-0">
-                <small>If it is not working, click the shield icon at the right of your browser search bar and click '<em>Load unsafe scripts</em>'.
-                ~ <u>This is because League's API uses <em>http</em> instead of <em>https</em>.</u> <strong>smh!</strong></small>
-            </p>
-        </div>
-        <hr style="border-color:white">
+        <h1 class="display-4 mt-4 mb-4 text-center text-info"><strong>League o Legens</strong></h1>
         <form class="input-group mb-4" id="search">
             <div class="input-group-prepend">
                 <span class="input-group-text">Champion:</span>
@@ -46,7 +38,7 @@
             let champion = capitalize(document.getElementById('champion').value);
 
 
-            fetch(`http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/${champion}.json`)
+            fetch(`https://ddragon.leagueoflegends.com/cdn/9.14.1/data/en_US/champion/${champion}.json`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
@@ -57,7 +49,7 @@
                 let output = `
                     <h3>${name}</h3>
                     <h5 class="font-weight-light mb-4">${title}</h5>
-                    <img src='http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion}_0.jpg' class="img-thumbnail" style="max-width: 60%">
+                    <img src='https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion}_0.jpg' class="img-thumbnail" style="max-width: 60%">
                     <hr>
                     <p">${lore}</p>
                 `
