@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leagueo</title>
+    <link rel="icon" href="img/favicons/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="bg-dark">
+    <div class="container">
+        <h1 class="display-4 mt-4 mb-4 text-center text-info"><strong>League o Legens</strong></h1>
+    
+        <form class="input-group mb-4" id="search">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Champion:</span>
+            </div>
+            <input type="text" id="champion" class="form-control" placeholder="Teemo">
+            <div class="input-group-append">
+                <input class="btn btn-outline-secondary" type="submit" value="~~~ Enter ~~~">
+            </div>
+        </form>
+    <div class="text-center mt-5 text-light" id="output"></div>
+
+    <footer class="text-center font-italic font-weight-light text-light">
+        <p>Made by Simon :)</p>
+    </footer>
+
+    
+
+    <script>
+        document.getElementById('search').addEventListener('submit', search);
+
+        function search(e){
+            e.preventDefault();
+            const api = 'RGAPI-ee21e315-05d7-49e3-8cef-21ce8560a461';
+
+            let champion = capitalize(document.getElementById('champion').value);
+
+
+            fetch(`http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/${champion}.json`)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                const name = data.data[champion].id;
+                const title = data.data[champion].title;
+                const lore = data.data[champion].lore
+                
+                let output = `
+                    <h3>${name}</h3>
+                    <h5 class="font-weight-light mb-4">${title}</h5>
+                    <img src='http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion}_0.jpg' class="img-thumbnail" style="max-width: 60%">
+                    <hr>
+                    <p">${lore}</p>
+                `
+
+                document.getElementById('output').innerHTML = output;
+            })
+            .catch((err) => console.log(err));
+        }
+
+        function capitalize(string){
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+    </script>
+</body>
+</html>
